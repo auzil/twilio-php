@@ -43,8 +43,14 @@ abstract class Services_Twilio_ListResource extends Services_Twilio_Resource
         $instance = new $this->instance_name(
             $this->client, $this->uri . "/$sid"
         );
+
+        $parts = explode('/',$instance->uri);
+        array_pop($parts);
+        $uri = implode('/',$parts).'/'.$instance->sid;
+        $instance->uri = $uri;
+
         // XXX check if this is actually a sid in all cases.
-        $instance->sid = $sid;
+        //$instance->sid = $sid;
         return $instance;
     }
 
